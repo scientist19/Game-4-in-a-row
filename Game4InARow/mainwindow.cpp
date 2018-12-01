@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "gamefield.h"
+#include "gamefield0.h"
 
 #include <QtGui>
 
@@ -22,18 +22,18 @@ MainWindow::~MainWindow()
 void MainWindow::play(){
 
     int pos = ui->spinBox->value();
-    if (!gf.canAddToColumn(pos)) return;
+    if (!gf->canAddToColumn(pos)) return;
 
     qDebug() << "User move: ";
-    gf.addToColumn(pos, 1);
-    gf.print();
+    gf->addToColumn(pos, 1);
+    gf->print();
 
-    if (gf.endOfGame() == 1) qDebug() << "WINNER PLAYER # 1 !!!!!!!";
+    if (gf->endOfGame() == 1) qDebug() << "WINNER PLAYER # 1 !!!!!!!";
 
     qDebug() << "AI move: ";
-    auto bm = gf.bestMove(8, 2);
-    gf.addToColumn(bm.first, 2);
-    gf.print();
+    auto bm = gf->bestMove(8, 2);
+    gf->addToColumn(bm.first, 2);
+    gf->print();
 
-    if (gf.endOfGame() == 2) qDebug() << "WINNER PLAYER # 2 (AI) !!!!!!!";
+    if (gf->endOfGame() == 2) qDebug() << "WINNER PLAYER # 2 (AI) !!!!!!!";
 }

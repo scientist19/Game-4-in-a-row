@@ -27,16 +27,24 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    gamefield.cpp
+    gamefield0.cpp \
+    gamefield.cpp \
+    field.cpp
 
 HEADERS += \
         mainwindow.h \
-    gamefield.h
+    gamefield0.h \
+    gamefield.h \
+    field.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    gamefield.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resource.qrc

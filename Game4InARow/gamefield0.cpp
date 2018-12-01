@@ -1,77 +1,23 @@
-#include "gamefield.h"
-#include "ui_gamefield.h"
-
-#include "field.h"
+#include "gamefield0.h"
 
 #include <vector>
 #include <QString>
 #include <QtGui>
 
-#include <QFileDialog>
-#include <QRectF>
-
-
-GameField::GameField(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::GameField)
+GameField0::GameField0(int height, int width)
 {
-    ui->setupUi(this);
+    this->height = height;
+    this->width = width;
 }
 
-
-GameField::GameField(QWidget *parent, int height, int width) :
-    QWidget(parent),
-    ui(new Ui::GameField),
-    width(width),
-    height(height)
-{
-    ui->setupUi(this);
-    show();
-
-    ui->graphicsView->setScene(scene);
-    createField();
-}
-
-void GameField::createField(){
-
-    const double scale = 0.8;
-
-    QImage image(":/rec/img/cell.png");
-    double w = image.width()*scale,
-           h = image.height()*scale;
-
-    myRect = new Field();
-    myRect->setRect(QRectF(LEFT_SHIFT, TOP_SHIFT, 7*w, 6*h));
-    myRect->setBrush(QBrush(QColor(0,0,0,0)));
-    myRect->setCursor(QCursor(Qt::PointingHandCursor));
-    scene->addItem(myRect);
-
-    for (int i = 0; i < 6; i++)
-        for (int j = 0; j < 7; j++){
-
-            QGraphicsPixmapItem* myItem = new QGraphicsPixmapItem(QPixmap::fromImage(image));
-            myItem->setScale(scale);
-            myItem->setPos(LEFT_SHIFT + j*w, TOP_SHIFT + i*h);
-
-            scene->addItem(myItem);
-            itemsList.push_back(myItem);
-        }
-}
-
-
-GameField::~GameField()
-{
-    delete ui;
-}
-
-bool GameField::canAddToColumn(int column)
+bool GameField0::canAddToColumn(int column)
 {
     if (column < 0 || column >= width) return false;
     if (numberInColumn[column] < height) return true;
     return false;
 }
 
-bool GameField::addToColumn(int column, int player)
+bool GameField0::addToColumn(int column, int player)
 {
     if (!canAddToColumn(column)) return false;
 
@@ -80,7 +26,7 @@ bool GameField::addToColumn(int column, int player)
     return true;
 }
 
-bool GameField::removeFromColumn(int column){
+bool GameField0::removeFromColumn(int column){
 
     if (column < 0 || column >= width) return false;
     if (numberInColumn[column] == 0) return false;
@@ -90,7 +36,7 @@ bool GameField::removeFromColumn(int column){
     return true;
 }
 
-int GameField::endOfGame()
+int GameField0::endOfGame()
 {
     int h, v, d1, d2;
 
@@ -153,7 +99,7 @@ int GameField::endOfGame()
 }
 
 
-std::pair<int, int> GameField::bestMove(int movesLeft, int player){
+std::pair<int, int> GameField0::bestMove(int movesLeft, int player){
 
     if (movesLeft == 0) return std::make_pair(0, 0);
     std::vector<int> potentialMoves;
@@ -200,7 +146,7 @@ std::pair<int, int> GameField::bestMove(int movesLeft, int player){
     return std::make_pair(potentialMoves[rand() % potentialMoves.size()], 0);
 }
 
-void GameField::print(){
+void GameField0::print(){
 
     for (int i = 0; i < height; i++){
         QString s;
@@ -211,3 +157,5 @@ void GameField::print(){
 
     qDebug() << "\n";
 }
+
+
