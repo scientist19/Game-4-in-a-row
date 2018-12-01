@@ -29,13 +29,15 @@ SOURCES += \
         mainwindow.cpp \
     gamefield0.cpp \
     gamefield.cpp \
-    field.cpp
+    field.cpp \
+    circle.cpp
 
 HEADERS += \
         mainwindow.h \
     gamefield0.h \
     gamefield.h \
-    field.h
+    field.h \
+    circle.h
 
 FORMS += \
         mainwindow.ui \

@@ -21,8 +21,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::play(){
 
+    /*
     int pos = ui->spinBox->value();
-    if (!gf->canAddToColumn(pos)) return;
+    if (!gf->->canAddToColumn(pos)) return;
 
     qDebug() << "User move: ";
     gf->addToColumn(pos, 1);
@@ -36,4 +37,5 @@ void MainWindow::play(){
     gf->print();
 
     if (gf->endOfGame() == 2) qDebug() << "WINNER PLAYER # 2 (AI) !!!!!!!";
+    */
 }

@@ -1,22 +1,55 @@
 #ifndef FIELD_H
 #define FIELD_H
 
+#include "circle.h"
 
+#include <QGraphicsScene>
 #include <QGraphicsRectItem>
+
+#include <QTimer>
 
 class Field : public QGraphicsRectItem
 {
 public:
-    Field();
+    Field(QGraphicsScene* scene, int cellSize);
     void setItem(QGraphicsPixmapItem* item, int i, int j);
 
+    bool canAddToColumn(int column);
+    int endOfGame();
+    bool addToColumn(int column, int player);
+    bool removeFromColumn(int column);
+    std::pair<int, int> bestMove(int movesLeft, int player);
+
+    void print();
+    void AIMove();
 
     const static int NMAX = 10;
+    const static int LEFT_SHIFT = 100;
+    const static int TOP_SHIFT = 50;
+
+    bool isTimeToMove();
+
     // QGraphicsItem interface
-protected:
+private slots:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
+private:
+    int field[NMAX][NMAX] = {{0}};
+    int numberInColumn[NMAX] = {0};
+    int width = 7;
+    int height = 6;
+    int cellSize;
+    bool* timeToMove = new bool(0);
+
+    int curPlayer;
+
     QGraphicsPixmapItem* itemsList[NMAX][NMAX];
+    QVector <Circle*> circlesList;
+    QGraphicsScene* scene;
+
+
+    int findClickedColumn(int x);
+
 };
 
 #endif // FIELD_H
