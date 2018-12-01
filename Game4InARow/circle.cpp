@@ -1,8 +1,9 @@
 #include "circle.h"
 
-Circle::Circle(int leftToFall, bool* timeToMove) : QGraphicsEllipseItem (),
+Circle::Circle(int leftToFall, int* timeToMove, bool f) : QGraphicsEllipseItem (),
     leftToFall(leftToFall),
-    timeToMove(timeToMove)
+    timeToMove(timeToMove),
+    f(f)
 {
 
 }
@@ -21,7 +22,8 @@ void Circle::advance(int phase)
     if (leftToFall >= step) moveBy(0, step);
     else {
         moveBy(0, leftToFall);
-        if (timeToMove) *timeToMove = 1;
+        if (!f) *timeToMove = 2;
+        else *timeToMove = 0;
     }
 
     leftToFall -= step;

@@ -30,7 +30,7 @@ public slots: void checkForMove();
 private:
     Ui::GameField *ui;
 
-    QGraphicsScene* scene = new QGraphicsScene(0, 0, 1000, 750, this);
+    QGraphicsScene* scene = new QGraphicsScene(0, 0, 1200, 800, this);
     Field* myRect;
     QTimer* animationTimer;
     QTimer* moveTimeTimer;

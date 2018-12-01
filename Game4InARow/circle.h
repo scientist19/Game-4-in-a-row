@@ -6,7 +6,7 @@
 class Circle : public QGraphicsEllipseItem
 {
 public:
-    Circle(int leftToFall, bool* timeToMove = nullptr);
+    Circle(int leftToFall, int* timeToMove, bool f = false);
 
     // QGraphicsItem interface
 public:
@@ -21,7 +21,8 @@ private:
     int curP = 0;
     int step = 3;
 
-    bool* timeToMove;
+    int* timeToMove;
+    bool f;
 };
 
 #endif // CIRCLE_H

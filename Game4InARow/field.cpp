@@ -12,6 +12,9 @@ Field::Field(QGraphicsScene* scene, int cellSize) :
 
 void Field::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    if (*timeToMove != 0) return;
+    *timeToMove = 1;
+
     qDebug() << event->pos().x() << " " << event->pos().y();
     int clickedColumn = findClickedColumn(event->pos().x());
 
@@ -29,20 +32,20 @@ void Field::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void Field::AIMove()
 {
-    *timeToMove = 0;
+    *timeToMove = 3;
     auto bm = bestMove(6, 2);
     int column = bm.first;
 
     int toFall = (height - numberInColumn[column])*cellSize;
     addToColumn(column, 2);
 
-    Circle* AICircle = new Circle(toFall);
+    Circle* AICircle = new Circle(toFall, timeToMove, true);
     AICircle->setRect(LEFT_SHIFT + column*cellSize, TOP_SHIFT - cellSize, 95, 95);
     AICircle->setBrush(QBrush(QColor(255, 0, 0)));
     scene->addItem(AICircle);
 }
 
-bool Field::isTimeToMove()
+int Field::isTimeToMove()
 {
     return *timeToMove;
 }

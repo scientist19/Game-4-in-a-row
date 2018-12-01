@@ -27,7 +27,7 @@ public:
     const static int LEFT_SHIFT = 100;
     const static int TOP_SHIFT = 50;
 
-    bool isTimeToMove();
+    int isTimeToMove();
 
     // QGraphicsItem interface
 private slots:
@@ -39,7 +39,12 @@ private:
     int width = 7;
     int height = 6;
     int cellSize;
-    bool* timeToMove = new bool(0);
+
+    // 0 - user can make a move
+    // 1 - circle is falling
+    // 2 - circle falled, AI can make a move
+    // 3 = AI making a move && its circle is falling
+    int* timeToMove = new int(0);
 
     int curPlayer;
 
