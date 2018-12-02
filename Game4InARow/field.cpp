@@ -8,6 +8,7 @@ Field::Field(QGraphicsScene* scene, int cellSize) :
     cellSize(cellSize),
     scene(scene)
 {
+    this->setAcceptHoverEvents(true);
 }
 
 void Field::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -26,8 +27,58 @@ void Field::mousePressEvent(QGraphicsSceneMouseEvent *event)
     myCircle->setRect(LEFT_SHIFT + clickedColumn*cellSize, TOP_SHIFT - cellSize, 95, 95);
     myCircle->setBrush(QBrush(QColor(255, 255, 0)));
     scene->addItem(myCircle);
+}
 
+void Field::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    int selectedColumn = findClickedColumn(event->pos().x());
+    qDebug() << "Selected column = " << selectedColumn;
 
+    if (this->selectedColumn == selectedColumn) return;
+
+    if (this->selectedColumn != -1)
+    for (int i = 0; i < height; i++)
+        itemsList[i][this->selectedColumn]->setPixmap(QPixmap::fromImage(QImage(":/rec/img/cell.png")));
+
+    this->selectedColumn = selectedColumn;
+    setCursor(Qt::PointingHandCursor);
+
+    if (canAddToColumn(selectedColumn))
+    for (int i = 0; i < height; i++)
+        itemsList[i][selectedColumn]->setPixmap(QPixmap::fromImage(QImage(":/rec/img/selectedCell4.png")));
+    else setCursor(Qt::ForbiddenCursor);
+
+}
+
+void Field::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+
+    if (this->selectedColumn != -1)
+    for (int i = 0; i < height; i++)
+        itemsList[i][this->selectedColumn]->setPixmap(QPixmap::fromImage(QImage(":/rec/img/cell.png")));
+    this->selectedColumn = -1;
+
+    setCursor(Qt::PointingHandCursor);
+}
+
+void Field::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
+    int selectedColumn = findClickedColumn(event->pos().x());
+    qDebug() << "Selected column = " << selectedColumn;
+
+    if (this->selectedColumn == selectedColumn) return;
+
+    if (this->selectedColumn != -1)
+    for (int i = 0; i < height; i++)
+        itemsList[i][this->selectedColumn]->setPixmap(QPixmap::fromImage(QImage(":/rec/img/cell.png")));
+
+    this->selectedColumn = selectedColumn;
+    setCursor(Qt::PointingHandCursor);
+
+    if (canAddToColumn(selectedColumn))
+    for (int i = 0; i < height; i++)
+        itemsList[i][selectedColumn]->setPixmap(QPixmap::fromImage(QImage(":/rec/img/selectedCell4.png")));
+    else setCursor(Qt::ForbiddenCursor);
 }
 
 void Field::AIMove()
@@ -53,7 +104,7 @@ int Field::isTimeToMove()
 int Field::findClickedColumn(int x)
 {
     x -= LEFT_SHIFT;
-    return x/cellSize;
+    return std::min(width-1, x/cellSize);
 }
 
 void Field::setItem(QGraphicsPixmapItem* item, int i, int j){
@@ -210,3 +261,5 @@ void Field::print(){
 
     qDebug() << "\n";
 }
+
+

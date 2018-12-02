@@ -20,7 +20,7 @@ GameField::GameField(QWidget *parent) :
     show();
 
     ui->graphicsView->setScene(scene);
-    ui->graphicsView->setBackgroundBrush(QBrush(QColor(0, 255, 0, 100)));
+    ui->graphicsView->setBackgroundBrush(QBrush(QColor(0, 0, 0, 100)));
 
     createField();
 

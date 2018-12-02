@@ -46,7 +46,7 @@ private:
     // 3 = AI making a move && its circle is falling
     int* timeToMove = new int(0);
 
-    int curPlayer;
+    int selectedColumn = -1;
 
     QGraphicsPixmapItem* itemsList[NMAX][NMAX];
     QVector <Circle*> circlesList;
@@ -55,6 +55,12 @@ private:
 
     int findClickedColumn(int x);
 
+
+    // QGraphicsItem interface
+protected:
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+    void hoverMoveEvent(QGraphicsSceneHoverEvent *event);
 };
 
 #endif // FIELD_H

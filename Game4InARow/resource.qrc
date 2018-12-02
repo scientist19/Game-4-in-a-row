@@ -1,6 +1,11 @@
 <RCC>
     <qresource prefix="/rec">
-        <file>img/cell.png</file>
         <file>img/cell1.png</file>
+        <file>img/selectedCell.png</file>
+        <file>img/selectedCell1.png</file>
+        <file>img/selectedCell2.png</file>
+        <file>img/selectedCell3.png</file>
+        <file>img/cell.png</file>
+        <file>img/selectedCell4.png</file>
     </qresource>
 </RCC>
