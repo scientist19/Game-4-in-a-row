@@ -14,10 +14,12 @@ Field::Field(QGraphicsScene* scene, int cellSize) :
 void Field::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (*timeToMove != 0) return;
-    *timeToMove = 1;
 
     qDebug() << event->pos().x() << " " << event->pos().y();
     int clickedColumn = findClickedColumn(event->pos().x());
+
+    if (!canAddToColumn(clickedColumn)) return;
+    *timeToMove = 1;
 
     int toFall = (height - numberInColumn[clickedColumn])*cellSize;
     addToColumn(clickedColumn, 1);
