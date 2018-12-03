@@ -17,18 +17,19 @@ GameField::GameField(QWidget *parent) :
     ui(new Ui::GameField)
 {
     ui->setupUi(this);
-    //show();
+    show();
+
 
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setBackgroundBrush(QBrush(QColor(0, 0, 0, 100)));
 
-    ui->graphicsView->setBackgroundBrush(QBrush(QImage(":/rec/img/background1.png")));
-
+//    ui->graphicsView->setBackgroundBrush(QBrush(QImage(":/rec/img/background1.png")));
     createField();
 
     moveTimeTimer = new QTimer();
     connect(moveTimeTimer, SIGNAL(timeout()), this, SLOT(checkForMove()));
     moveTimeTimer->start(1000);
+
 }
 
 void GameField::checkForMove()

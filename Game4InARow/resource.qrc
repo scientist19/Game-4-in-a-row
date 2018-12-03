@@ -9,5 +9,6 @@
         <file>img/selectedCell4.png</file>
         <file>img/background.jpg</file>
         <file>img/background1.png</file>
+        <file>img/background2.png</file>
     </qresource>
 </RCC>

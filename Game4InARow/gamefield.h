@@ -22,7 +22,7 @@ public:
     ~GameField();
 
     const static int NMAX = 10;
-    const static int LEFT_SHIFT = 100;
+    const static int LEFT_SHIFT = 50;
     const static int TOP_SHIFT = 50;
 
 public slots: void checkForMove();
@@ -30,7 +30,7 @@ public slots: void checkForMove();
 private:
     Ui::GameField *ui;
 
-    QGraphicsScene* scene = new QGraphicsScene(0, 0, 1200, 800, this);
+    QGraphicsScene* scene = new QGraphicsScene(0, 0, 850, 700, this);
     Field* myRect;
     QTimer* animationTimer;
     QTimer* moveTimeTimer;

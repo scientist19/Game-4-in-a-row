@@ -22,7 +22,7 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
-    GameField* gf = new GameField(nullptr);
+    GameField* gf = new GameField();
 };
 
 #endif // MAINWINDOW_H

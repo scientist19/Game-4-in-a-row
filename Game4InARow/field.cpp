@@ -1,5 +1,7 @@
 #include "field.h"
 
+#include <time.h>
+
 #include <QtGui>
 #include <QGraphicsSceneMouseEvent>
 #include <QTimer>
@@ -9,6 +11,7 @@ Field::Field(QGraphicsScene* scene, int cellSize) :
     scene(scene)
 {
     this->setAcceptHoverEvents(true);
+    srand(time(0));
 }
 
 void Field::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -86,7 +89,7 @@ void Field::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 void Field::AIMove()
 {
     *timeToMove = 3;
-    auto bm = bestMove(6, 2);
+    auto bm = bestMove(7, 2);
     int column = bm.first;
 
     int toFall = (height - numberInColumn[column])*cellSize;

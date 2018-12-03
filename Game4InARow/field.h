@@ -24,7 +24,7 @@ public:
     void AIMove();
 
     const static int NMAX = 10;
-    const static int LEFT_SHIFT = 100;
+    const static int LEFT_SHIFT = 50;
     const static int TOP_SHIFT = 50;
 
     int isTimeToMove();
