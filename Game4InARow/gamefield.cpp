@@ -44,7 +44,7 @@ void GameField::createField(){
     QImage image(":/rec/img/cell.png");
     int cellSize = image.width()*scale;
 
-    myRect = new Field(scene, cellSize);
+    myRect = new SinglePlayerField(scene, cellSize);
     myRect->setRect(QRectF(LEFT_SHIFT, TOP_SHIFT, 7*cellSize, 6*cellSize));
     myRect->setBrush(QBrush(QColor(0,0,0,0)));
     myRect->setCursor(QCursor(Qt::PointingHandCursor));

@@ -32,7 +32,9 @@ SOURCES += \
     field.cpp \
     circle.cpp \
     aicircle.cpp \
-    usercircle.cpp
+    usercircle.cpp \
+    singleplayerfield.cpp \
+    twoplayersfield.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -41,7 +43,9 @@ HEADERS += \
     field.h \
     circle.h \
     aicircle.h \
-    usercircle.h
+    usercircle.h \
+    singleplayerfield.h \
+    twoplayersfield.h
 
 FORMS += \
         mainwindow.ui \

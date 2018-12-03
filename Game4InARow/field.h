@@ -2,10 +2,13 @@
 #define FIELD_H
 
 #include "circle.h"
+#include "aicircle.h"
+#include "usercircle.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
-
+#include <QtGui>
+#include <QGraphicsSceneMouseEvent>
 #include <QTimer>
 
 class Field : public QGraphicsRectItem
@@ -18,10 +21,11 @@ public:
     int endOfGame();
     bool addToColumn(int column, int player);
     bool removeFromColumn(int column);
-    std::pair<int, int> bestMove(int movesLeft, int player);
-
     void print();
-    void AIMove();
+
+    virtual void AIMove() = 0;
+    virtual std::pair<int, int> bestMove(int movesLeft, int player) = 0;
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) = 0;
 
     const static int NMAX = 10;
     const static int LEFT_SHIFT = 50;
@@ -29,11 +33,7 @@ public:
 
     int isTimeToMove();
 
-    // QGraphicsItem interface
-private slots:
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-
-private:
+protected:
     int field[NMAX][NMAX] = {{0}};
     int numberInColumn[NMAX] = {0};
     int width = 7;

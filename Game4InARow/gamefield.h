@@ -1,7 +1,7 @@
 #ifndef GAMEFIELD_H
 #define GAMEFIELD_H
 
-#include "field.h"
+#include "singleplayerfield.h"
 
 #include <QWidget>
 
