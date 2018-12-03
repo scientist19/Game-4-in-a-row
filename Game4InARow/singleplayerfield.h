@@ -10,6 +10,7 @@ public:
 
     std::pair<int, int> bestMove(int movesLeft, int player);
     void AIMove();
+    void changePlayer();
 
 protected:
      void mousePressEvent(QGraphicsSceneMouseEvent *event);

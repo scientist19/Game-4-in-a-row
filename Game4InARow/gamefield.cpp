@@ -24,7 +24,7 @@ GameField::GameField(QWidget *parent) :
     ui->graphicsView->setBackgroundBrush(QBrush(QColor(0, 0, 0, 100)));
 
 //    ui->graphicsView->setBackgroundBrush(QBrush(QImage(":/rec/img/background1.png")));
-    createField();
+    createField(true);
 
     moveTimeTimer = new QTimer();
     connect(moveTimeTimer, SIGNAL(timeout()), this, SLOT(checkForMove()));
@@ -34,21 +34,27 @@ GameField::GameField(QWidget *parent) :
 
 void GameField::checkForMove()
 {
+    myField->changePlayer();
+    /*
+    if (myRect->isTimeToMove() == 0) myRect->changePlayer();
     if (myRect->isTimeToMove() == 2) myRect->AIMove();
+    */
 }
 
-void GameField::createField(){
+void GameField::createField(bool isSingleGame){
 
     const double scale = 0.8;
 
     QImage image(":/rec/img/cell.png");
     int cellSize = image.width()*scale;
 
-    myRect = new SinglePlayerField(scene, cellSize);
-    myRect->setRect(QRectF(LEFT_SHIFT, TOP_SHIFT, 7*cellSize, 6*cellSize));
-    myRect->setBrush(QBrush(QColor(0,0,0,0)));
-    myRect->setCursor(QCursor(Qt::PointingHandCursor));
-    scene->addItem(myRect);
+    if (isSingleGame) myField = new SinglePlayerField(scene, cellSize);
+    else myField = new TwoPlayersField(scene, cellSize);
+
+    myField->setRect(QRectF(LEFT_SHIFT, TOP_SHIFT, 7*cellSize, 6*cellSize));
+    myField->setBrush(QBrush(QColor(0,0,0,0)));
+    myField->setCursor(QCursor(Qt::PointingHandCursor));
+    scene->addItem(myField);
 
     animationTimer = new QTimer(this);
     connect(animationTimer, SIGNAL(timeout()), scene, SLOT(advance()));
@@ -64,7 +70,7 @@ void GameField::createField(){
             myItem->setZValue(1);
 
             scene->addItem(myItem);
-            myRect->setItem(myItem, i, j);
+            myField->setItem(myItem, i, j);
         }
 }
 

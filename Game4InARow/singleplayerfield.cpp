@@ -13,6 +13,7 @@ void SinglePlayerField::mousePressEvent(QGraphicsSceneMouseEvent *event)
     int clickedColumn = findClickedColumn(event->pos().x());
 
     if (!canAddToColumn(clickedColumn)) return;
+
     *timeToMove = 1;
 
     int toFall = (height - numberInColumn[clickedColumn])*cellSize;
@@ -29,6 +30,7 @@ void SinglePlayerField::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void SinglePlayerField::AIMove()
 {
+    player = 2;
     *timeToMove = 3;
     auto bm = bestMove(7, 2);
     int column = bm.first;
@@ -42,6 +44,12 @@ void SinglePlayerField::AIMove()
     scene->addItem(circle);
 
     circlesList.push_back(circle);
+}
+
+void SinglePlayerField::changePlayer(){
+
+    if (*timeToMove == 0) player = 1;
+    if (*timeToMove == 2) AIMove();
 }
 
 std::pair<int, int> SinglePlayerField::bestMove(int movesLeft, int player){

@@ -2,6 +2,7 @@
 #define GAMEFIELD_H
 
 #include "singleplayerfield.h"
+#include "twoplayersfield.h"
 
 #include <QWidget>
 
@@ -31,11 +32,11 @@ private:
     Ui::GameField *ui;
 
     QGraphicsScene* scene = new QGraphicsScene(0, 0, 850, 700, this);
-    Field* myRect;
+    Field* myField;
     QTimer* animationTimer;
     QTimer* moveTimeTimer;
 
-    void createField();
+    void createField(bool isSingleGame);
 };
 
 #endif // GAMEFIELD_H

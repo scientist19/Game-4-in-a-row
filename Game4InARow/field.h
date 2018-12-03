@@ -24,7 +24,6 @@ public:
     void print();
 
     virtual void AIMove() = 0;
-    virtual std::pair<int, int> bestMove(int movesLeft, int player) = 0;
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) = 0;
 
     const static int NMAX = 10;
@@ -32,6 +31,7 @@ public:
     const static int TOP_SHIFT = 50;
 
     int isTimeToMove();
+    virtual void changePlayer() = 0;
 
 protected:
     int field[NMAX][NMAX] = {{0}};
@@ -40,12 +40,13 @@ protected:
     int height = 6;
     int cellSize;
 
+    int player = 1;
+
     // 0 - user can make a move
     // 1 - circle is falling
     // 2 - circle falled, AI can make a move
     // 3 = AI making a move && its circle is falling
     int* timeToMove = new int(0);
-
     int selectedColumn = -1;
 
     QGraphicsPixmapItem* itemsList[NMAX][NMAX];
