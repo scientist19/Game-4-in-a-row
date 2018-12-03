@@ -30,14 +30,18 @@ SOURCES += \
     gamefield0.cpp \
     gamefield.cpp \
     field.cpp \
-    circle.cpp
+    circle.cpp \
+    aicircle.cpp \
+    usercircle.cpp
 
 HEADERS += \
         mainwindow.h \
     gamefield0.h \
     gamefield.h \
     field.h \
-    circle.h
+    circle.h \
+    aicircle.h \
+    usercircle.h
 
 FORMS += \
         mainwindow.ui \

@@ -1,4 +1,6 @@
 #include "field.h"
+#include "aicircle.h"
+#include "usercircle.h"
 
 #include <time.h>
 
@@ -28,10 +30,12 @@ void Field::mousePressEvent(QGraphicsSceneMouseEvent *event)
     addToColumn(clickedColumn, 1);
     qDebug() << "NUMBER OF COLUMN = " << clickedColumn;
 
-    Circle* myCircle = new Circle(toFall, timeToMove);
+    userCircle* myCircle = new userCircle(toFall, timeToMove);
     myCircle->setRect(LEFT_SHIFT + clickedColumn*cellSize, TOP_SHIFT - cellSize, 95, 95);
     myCircle->setBrush(QBrush(QColor(255, 255, 0)));
     scene->addItem(myCircle);
+
+    circlesList.push_back(myCircle);
 }
 
 void Field::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
@@ -95,10 +99,12 @@ void Field::AIMove()
     int toFall = (height - numberInColumn[column])*cellSize;
     addToColumn(column, 2);
 
-    Circle* AICircle = new Circle(toFall, timeToMove, true);
-    AICircle->setRect(LEFT_SHIFT + column*cellSize, TOP_SHIFT - cellSize, 95, 95);
-    AICircle->setBrush(QBrush(QColor(255, 0, 0)));
-    scene->addItem(AICircle);
+    AICircle* circle = new AICircle(toFall, timeToMove);
+    circle->setRect(LEFT_SHIFT + column*cellSize, TOP_SHIFT - cellSize, 95, 95);
+    circle->setBrush(QBrush(QColor(255, 0, 0)));
+    scene->addItem(circle);
+
+    circlesList.push_back(circle);
 }
 
 int Field::isTimeToMove()

@@ -6,23 +6,15 @@
 class Circle : public QGraphicsEllipseItem
 {
 public:
-    Circle(int leftToFall, int* timeToMove, bool f = false);
+    Circle(int leftToFall, int* timeToMove);
 
-    // QGraphicsItem interface
-public:
-    void advance(int phase);
-
-signals:
-    void reachPlace();
-
-private:
+protected:
     int leftToFall;
     int period = 5;
     int curP = 0;
     int step = 3;
 
     int* timeToMove;
-    bool f;
 };
 
 #endif // CIRCLE_H
