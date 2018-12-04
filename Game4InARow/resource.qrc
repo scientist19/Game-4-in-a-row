@@ -1,14 +1,14 @@
 <RCC>
     <qresource prefix="/rec">
         <file>img/cell1.png</file>
-        <file>img/selectedCell.png</file>
-        <file>img/selectedCell1.png</file>
-        <file>img/selectedCell2.png</file>
-        <file>img/selectedCell3.png</file>
         <file>img/cell.png</file>
         <file>img/selectedCell4.png</file>
-        <file>img/background.jpg</file>
         <file>img/background1.png</file>
         <file>img/background2.png</file>
+        <file>img/cellDarkBlue.png</file>
+        <file>img/cellDarkGray.png</file>
+        <file>img/cellGray.png</file>
+        <file>img/cellGreen.png</file>
+        <file>img/cellWhite.png</file>
     </qresource>
 </RCC>

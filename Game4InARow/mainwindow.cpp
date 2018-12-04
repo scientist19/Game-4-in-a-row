@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "gamefield0.h"
-
 #include <QtGui>
 
 MainWindow::MainWindow(QWidget *parent) :

@@ -9,6 +9,8 @@ void SinglePlayerField::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (*timeToMove != 0) return;
 
+    if (gameOver) return;
+
     qDebug() << event->pos().x() << " " << event->pos().y();
     int clickedColumn = findClickedColumn(event->pos().x());
 
@@ -26,13 +28,40 @@ void SinglePlayerField::mousePressEvent(QGraphicsSceneMouseEvent *event)
     scene->addItem(myCircle);
 
     circlesList.push_back(myCircle);
+
+ //   if (endOfGame()) playerWin();
+}
+
+void SinglePlayerField::playerWin()
+{
+    gameOver = true;
+
+    setFieldCellsColor();
+    lightWinnerCells();
+
+    this->setAcceptHoverEvents(false);
+    this->setCursor(Qt::ForbiddenCursor);
+}
+
+void SinglePlayerField::AIWin()
+{
+    gameOver = true;
+
+    setFieldCellsColor();
+    lightWinnerCells();
+
+    this->setAcceptHoverEvents(false);
+    this->setCursor(Qt::ForbiddenCursor);
 }
 
 void SinglePlayerField::AIMove()
 {
+    if (endOfGame()) playerWin();
+    if (gameOver) return;
+
     player = 2;
     *timeToMove = 3;
-    auto bm = bestMove(7, 2);
+    auto bm = bestMove(6, 2);
     int column = bm.first;
 
     int toFall = (height - numberInColumn[column])*cellSize;
@@ -48,7 +77,10 @@ void SinglePlayerField::AIMove()
 
 void SinglePlayerField::changePlayer(){
 
-    if (*timeToMove == 0) player = 1;
+    if (*timeToMove == 0) {
+        player = 1;
+        if (endOfGame()) AIWin();
+    }
     if (*timeToMove == 2) AIMove();
 }
 

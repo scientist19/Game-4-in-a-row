@@ -9,6 +9,7 @@ TwoPlayersField::TwoPlayersField(QGraphicsScene* scene, int cellSize) : Field(sc
 void TwoPlayersField::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if (*timeToMove != 0) return;
+    if (gameOver) return;
 
     qDebug() << event->pos().x() << " " << event->pos().y();
     int clickedColumn = findClickedColumn(event->pos().x());
@@ -17,7 +18,7 @@ void TwoPlayersField::mousePressEvent(QGraphicsSceneMouseEvent *event)
     *timeToMove = 1;
 
     int toFall = (height - numberInColumn[clickedColumn])*cellSize;
-    addToColumn(clickedColumn, 1);
+    addToColumn(clickedColumn, player);
     qDebug() << "NUMBER OF COLUMN = " << clickedColumn;
 
     userCircle* myCircle = new userCircle(toFall, timeToMove);
@@ -44,5 +45,18 @@ void TwoPlayersField::changePlayer(){
     if (*timeToMove == 2){
         player = 3-player;
         *timeToMove = 0;
+
+        if (endOfGame()) playerWin();
     }
+}
+
+void TwoPlayersField::playerWin()
+{
+    gameOver = true;
+
+    setFieldCellsColor();
+    lightWinnerCells();
+
+    this->setAcceptHoverEvents(false);
+    this->setCursor(Qt::ForbiddenCursor);
 }

@@ -23,12 +23,11 @@ GameField::GameField(bool isSingleGame, QWidget *parent) :
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setBackgroundBrush(QBrush(QColor(0, 0, 0, 100)));
 
-//    ui->graphicsView->setBackgroundBrush(QBrush(QImage(":/rec/img/background1.png")));
     createField(isSingleGame);
 
     moveTimeTimer = new QTimer();
     connect(moveTimeTimer, SIGNAL(timeout()), this, SLOT(checkForMove()));
-    moveTimeTimer->start(1000);
+    moveTimeTimer->start(1000/4);
 
 }
 
@@ -45,7 +44,7 @@ void GameField::createField(bool isSingleGame){
 
     const double scale = 0.8;
 
-    QImage image(":/rec/img/cell.png");
+    QImage image(":/rec/img/cellGray.png");
     int cellSize = image.width()*scale;
 
     if (isSingleGame) myField = new SinglePlayerField(scene, cellSize);

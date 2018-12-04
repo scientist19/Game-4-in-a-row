@@ -10,7 +10,8 @@ public:
 
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void changePlayer();
-    void AIMove(){}
+
+    void playerWin();
 };
 
 #endif // TWOPLAYERSFIELD_H

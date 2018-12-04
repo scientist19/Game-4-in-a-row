@@ -8,7 +8,6 @@ Controller::Controller(QWidget *parent) : QMainWindow(parent)
     connect(menu->ui->singlePlayerButton, SIGNAL(clicked()), this, SLOT(onSinglePlayerButton()) );
     connect(menu->ui->twoPlayersButton, SIGNAL(clicked()), this, SLOT(onTwoPlayersButton()) );
 
-
 }
 
 void Controller::onSinglePlayerButton()

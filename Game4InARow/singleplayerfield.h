@@ -14,6 +14,8 @@ public:
 
 protected:
      void mousePressEvent(QGraphicsSceneMouseEvent *event);
+     void playerWin();
+     void AIWin();
 };
 
 #endif // SINGLEPLAYERFIELD_H

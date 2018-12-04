@@ -23,12 +23,15 @@ public:
     bool removeFromColumn(int column);
     void print();
 
-    virtual void AIMove() = 0;
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) = 0;
 
     const static int NMAX = 10;
     const static int LEFT_SHIFT = 50;
     const static int TOP_SHIFT = 50;
+
+    QPixmap cellImage = QPixmap::fromImage(QImage(":/rec/img/cellGray.png"));
+    QPixmap selectedCellImage = QPixmap::fromImage(QImage(":/rec/img/selectedCell4.png"));
+    QPixmap winnerCellImage = QPixmap::fromImage(QImage(":/rec/img/cellWhite.png"));
 
     int isTimeToMove();
     virtual void changePlayer() = 0;
@@ -41,6 +44,7 @@ protected:
     int cellSize;
 
     int player = 1;
+    bool gameOver = false;
 
     // 0 - user can make a move
     // 1 - circle is falling
@@ -55,6 +59,9 @@ protected:
 
 
     int findClickedColumn(int x);
+    void lightWinnerCells();
+    void lightWinnerCell(int i, int j);
+    void setFieldCellsColor();
 
 
     // QGraphicsItem interface
