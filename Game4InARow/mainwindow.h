@@ -20,9 +20,9 @@ public:
 public slots:
     void play();
 
-private:
+public:
     Ui::MainWindow *ui;
-    GameField* gf = new GameField();
+ //   GameField* gf = new GameField();
 };
 
 #endif // MAINWINDOW_H

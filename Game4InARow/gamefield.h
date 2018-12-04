@@ -19,7 +19,7 @@ class GameField : public QWidget
     Q_OBJECT
 
 public:
-    explicit GameField(QWidget *parent = nullptr);
+    explicit GameField(bool isSingleGame, QWidget *parent = nullptr);
     ~GameField();
 
     const static int NMAX = 10;
@@ -28,9 +28,10 @@ public:
 
 public slots: void checkForMove();
 
-private:
+public:
     Ui::GameField *ui;
 
+private:
     QGraphicsScene* scene = new QGraphicsScene(0, 0, 850, 700, this);
     Field* myField;
     QTimer* animationTimer;

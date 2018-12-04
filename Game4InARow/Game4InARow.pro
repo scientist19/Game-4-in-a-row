@@ -27,25 +27,25 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    gamefield0.cpp \
     gamefield.cpp \
     field.cpp \
     circle.cpp \
     aicircle.cpp \
     usercircle.cpp \
     singleplayerfield.cpp \
-    twoplayersfield.cpp
+    twoplayersfield.cpp \
+    controller.cpp
 
 HEADERS += \
         mainwindow.h \
-    gamefield0.h \
     gamefield.h \
     field.h \
     circle.h \
     aicircle.h \
     usercircle.h \
     singleplayerfield.h \
-    twoplayersfield.h
+    twoplayersfield.h \
+    controller.h
 
 FORMS += \
         mainwindow.ui \

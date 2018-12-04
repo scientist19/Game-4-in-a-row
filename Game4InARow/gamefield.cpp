@@ -12,7 +12,7 @@
 
 #include "circle.h"
 
-GameField::GameField(QWidget *parent) :
+GameField::GameField(bool isSingleGame, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::GameField)
 {
@@ -24,7 +24,7 @@ GameField::GameField(QWidget *parent) :
     ui->graphicsView->setBackgroundBrush(QBrush(QColor(0, 0, 0, 100)));
 
 //    ui->graphicsView->setBackgroundBrush(QBrush(QImage(":/rec/img/background1.png")));
-    createField(true);
+    createField(isSingleGame);
 
     moveTimeTimer = new QTimer();
     connect(moveTimeTimer, SIGNAL(timeout()), this, SLOT(checkForMove()));

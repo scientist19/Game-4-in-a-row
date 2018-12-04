@@ -60,7 +60,7 @@ background-color: rgb(0, 0, 0);
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="backToMenuButton">
        <property name="minimumSize">
         <size>
          <width>250</width>
