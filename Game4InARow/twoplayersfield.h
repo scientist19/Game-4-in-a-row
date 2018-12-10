@@ -6,7 +6,7 @@
 class TwoPlayersField : public Field
 {
 public:
-    TwoPlayersField(QGraphicsScene* scene, int cellSize);
+    TwoPlayersField(Scene* scene, int cellSize);
 
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void changePlayer();

@@ -2,11 +2,12 @@
 
 #include <time.h>
 
-Field::Field(QGraphicsScene* scene, int cellSize) :
+Field::Field(Scene* scene, int cellSize) :
     cellSize(cellSize),
     scene(scene)
 {
     this->setAcceptHoverEvents(true);
+    setCursor(Qt::PointingHandCursor);
     srand(time(0));
 
 }
@@ -23,7 +24,7 @@ void Field::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
         itemsList[i][this->selectedColumn]->setPixmap(cellImage);
 
     this->selectedColumn = selectedColumn;
-    setCursor(Qt::PointingHandCursor);
+//    setCursor(Qt::PointingHandCursor);
 
     if (canAddToColumn(selectedColumn))
     for (int i = 0; i < height; i++)
@@ -40,7 +41,7 @@ void Field::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
         itemsList[i][this->selectedColumn]->setPixmap(cellImage);
     this->selectedColumn = -1;
 
-    setCursor(Qt::PointingHandCursor);
+//    setCursor(Qt::PointingHandCursor);
 }
 
 void Field::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
@@ -55,7 +56,7 @@ void Field::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
         itemsList[i][this->selectedColumn]->setPixmap(cellImage);
 
     this->selectedColumn = selectedColumn;
-    setCursor(Qt::PointingHandCursor);
+//    setCursor(Qt::PointingHandCursor);
 
     if (canAddToColumn(selectedColumn))
     for (int i = 0; i < height; i++)

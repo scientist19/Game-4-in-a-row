@@ -3,11 +3,13 @@
 
 #include "singleplayerfield.h"
 #include "twoplayersfield.h"
+#include "scene.h"
+
+#include <Box2D/Box2D.h>
 
 #include <QWidget>
 
 #include <QGraphicsView>
-#include <QGraphicsScene>
 #include <QGraphicsItem>
 
 namespace Ui {
@@ -32,10 +34,12 @@ public:
     Ui::GameField *ui;
 
 private:
-    QGraphicsScene* scene = new QGraphicsScene(0, 0, 850, 700, this);
+    Scene* scene;
     Field* myField;
     QTimer* animationTimer;
     QTimer* moveTimeTimer;
+
+    b2World* world;
 
     void createField(bool isSingleGame);
 };

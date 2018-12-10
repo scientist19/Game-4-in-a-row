@@ -6,7 +6,7 @@
 class SinglePlayerField : public Field
 {
 public:
-    SinglePlayerField(QGraphicsScene* scene, int cellSize);
+    SinglePlayerField(Scene* scene, int cellSize);
 
     std::pair<int, int> bestMove(int movesLeft, int player);
     void AIMove();

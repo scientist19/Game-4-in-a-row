@@ -4,8 +4,8 @@
 #include "circle.h"
 #include "aicircle.h"
 #include "usercircle.h"
+#include "scene.h"
 
-#include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <QtGui>
 #include <QGraphicsSceneMouseEvent>
@@ -14,7 +14,7 @@
 class Field : public QGraphicsRectItem
 {
 public:
-    Field(QGraphicsScene* scene, int cellSize);
+    Field(Scene* scene, int cellSize);
     void setItem(QGraphicsPixmapItem* item, int i, int j);
 
     bool canAddToColumn(int column);
@@ -55,7 +55,7 @@ protected:
 
     QGraphicsPixmapItem* itemsList[NMAX][NMAX];
     QVector <Circle*> circlesList;
-    QGraphicsScene* scene;
+    Scene* scene;
 
 
     int findClickedColumn(int x);

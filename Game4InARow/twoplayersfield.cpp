@@ -1,6 +1,6 @@
 #include "twoplayersfield.h"
 
-TwoPlayersField::TwoPlayersField(QGraphicsScene* scene, int cellSize) : Field(scene, cellSize)
+TwoPlayersField::TwoPlayersField(Scene* scene, int cellSize) : Field(scene, cellSize)
 {
 
 }
@@ -16,13 +16,15 @@ void TwoPlayersField::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
     if (!canAddToColumn(clickedColumn)) return;
     *timeToMove = 1;
+    setCursor(Qt::ForbiddenCursor);
 
     int toFall = (height - numberInColumn[clickedColumn])*cellSize;
     addToColumn(clickedColumn, player);
     qDebug() << "NUMBER OF COLUMN = " << clickedColumn;
 
-    userCircle* myCircle = new userCircle(toFall, timeToMove);
-    myCircle->setRect(LEFT_SHIFT + clickedColumn*cellSize, TOP_SHIFT - cellSize, 95, 95);
+    userCircle* myCircle = new userCircle(scene->world, timeToMove,
+                                          QPointF(LEFT_SHIFT + clickedColumn*cellSize, TOP_SHIFT - cellSize));
+ //   myCircle->setRect(LEFT_SHIFT + clickedColumn*cellSize, TOP_SHIFT - cellSize, 95, 95);
 
     QBrush brush1 = QBrush(QColor(255, 255, 0)),
            brush2 = QBrush(QColor(255, 0, 0));
@@ -45,6 +47,7 @@ void TwoPlayersField::changePlayer(){
     if (*timeToMove == 2){
         player = 3-player;
         *timeToMove = 0;
+        setCursor(Qt::PointingHandCursor);
 
         if (endOfGame()) playerWin();
     }

@@ -6,7 +6,7 @@
 class AICircle : public Circle
 {
 public:
-    AICircle(int leftToFall, int* timeToMove);
+    AICircle(b2World* world, int* timeToMove, QPointF pos);
     void advance(int phase);
 };
 

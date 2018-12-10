@@ -1,24 +1,24 @@
 #include "usercircle.h"
 
-userCircle::userCircle(int leftToFall, int* timeToMove) : Circle(leftToFall, timeToMove)
+userCircle::userCircle(b2World* world, int* timeToMove, QPointF pos) : Circle(world, timeToMove, pos)
 {
+    setBrush(QBrush(Qt::yellow));
 }
 
 void userCircle::advance(int phase)
 {
     if (!phase) return;
-    if (leftToFall <= 0) return;
+    if (fallen) return;
 
-    if (++curP > period){
-        step+=2;
-        curP = 0;
-    }
+    prevY = pos().y();
 
-    if (leftToFall >= step) moveBy(0, step);
-    else {
-        moveBy(0, leftToFall);
+    qreal posx = (body->GetPosition().x)*SCALE - CIRCLE_RADIUS;
+    qreal posy = (body->GetPosition().y)*SCALE - CIRCLE_RADIUS;
+    setPos(posx, posy);
+
+    if (prevY == posy){
+
         *timeToMove = 2;
+        fallen = true;
     }
-
-    leftToFall -= step;
 }

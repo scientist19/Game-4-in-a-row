@@ -6,7 +6,7 @@
 class userCircle : public Circle
 {
 public:
-    userCircle(int leftToFall, int* timeToMove);
+    userCircle(b2World* world, int* timeToMove, QPointF pos);
     void advance(int phase);
 };
 

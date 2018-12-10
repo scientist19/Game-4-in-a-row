@@ -19,6 +19,8 @@ GameField::GameField(bool isSingleGame, QWidget *parent) :
     ui->setupUi(this);
     show();
 
+    world = new b2World(b2Vec2(0.00f, 10.00f));
+    scene = new Scene(0, 0, 850, 700, world);
 
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setBackgroundBrush(QBrush(QColor(0, 0, 0, 100)));
@@ -34,10 +36,6 @@ GameField::GameField(bool isSingleGame, QWidget *parent) :
 void GameField::checkForMove()
 {
     myField->changePlayer();
-    /*
-    if (myRect->isTimeToMove() == 0) myRect->changePlayer();
-    if (myRect->isTimeToMove() == 2) myRect->AIMove();
-    */
 }
 
 void GameField::createField(bool isSingleGame){
@@ -45,7 +43,7 @@ void GameField::createField(bool isSingleGame){
     const double scale = 0.8;
 
     QImage image(":/rec/img/cellGray.png");
-    int cellSize = image.width()*scale;
+    double cellSize = image.width()*scale;
 
     if (isSingleGame) myField = new SinglePlayerField(scene, cellSize);
     else myField = new TwoPlayersField(scene, cellSize);
@@ -57,7 +55,7 @@ void GameField::createField(bool isSingleGame){
 
     animationTimer = new QTimer(this);
     connect(animationTimer, SIGNAL(timeout()), scene, SLOT(advance()));
-    animationTimer->start(1000/90);
+    animationTimer->start(1000/110);
 
 
     for (int i = 0; i < 6; i++)
@@ -71,6 +69,29 @@ void GameField::createField(bool isSingleGame){
             scene->addItem(myItem);
             myField->setItem(myItem, i, j);
         }
+
+    /*
+    QGraphicsRectItem* rectItem = new QGraphicsRectItem(0, TOP_SHIFT + 6*cellSize, scene->sceneRect().width(), 0.2*SCALE);
+    rectItem->setBrush(QBrush(Qt::gray));
+    scene->addItem(rectItem);
+    */
+
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_staticBody;
+
+    float32 h = 0.2f;
+    float32 w = scene->sceneRect().width()/SCALE;
+    float32 posx = (scene->sceneRect().width()/2)/SCALE;
+    float32 posy = (TOP_SHIFT + 6*cellSize)/SCALE + h/2;
+    bodyDef.position.Set(posx, posy);
+
+    b2Body* body = world->CreateBody(&bodyDef);
+
+    b2PolygonShape shape;
+    shape.SetAsBox(w/2, h/2);
+
+    body->CreateFixture(&shape, 0.0f);
+
 }
 
 

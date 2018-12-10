@@ -34,7 +34,8 @@ SOURCES += \
     usercircle.cpp \
     singleplayerfield.cpp \
     twoplayersfield.cpp \
-    controller.cpp
+    controller.cpp \
+    scene.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,7 +46,9 @@ HEADERS += \
     usercircle.h \
     singleplayerfield.h \
     twoplayersfield.h \
-    controller.h
+    controller.h \
+    constanter.h \
+    scene.h
 
 FORMS += \
         mainwindow.ui \
@@ -58,3 +61,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resource.qrc
+
+win32: LIBS += -L$$PWD/./ -lBox2D
+
+INCLUDEPATH += $$PWD/.
+DEPENDPATH += $$PWD/.
+
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/./Box2D.lib
+else:win32-g++: PRE_TARGETDEPS += $$PWD/./libBox2D.a

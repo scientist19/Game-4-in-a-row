@@ -1,6 +1,6 @@
 #include "singleplayerfield.h"
 
-SinglePlayerField::SinglePlayerField(QGraphicsScene* scene, int cellSize) : Field(scene, cellSize)
+SinglePlayerField::SinglePlayerField(Scene* scene, int cellSize) : Field(scene, cellSize)
 {
 
 }
@@ -17,14 +17,18 @@ void SinglePlayerField::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if (!canAddToColumn(clickedColumn)) return;
 
     *timeToMove = 1;
+    setCursor(Qt::ForbiddenCursor);
 
     int toFall = (height - numberInColumn[clickedColumn])*cellSize;
     addToColumn(clickedColumn, 1);
     qDebug() << "NUMBER OF COLUMN = " << clickedColumn;
 
-    userCircle* myCircle = new userCircle(toFall, timeToMove);
+    userCircle* myCircle = new userCircle(scene->world, timeToMove,
+                                          QPointF(LEFT_SHIFT + clickedColumn*cellSize, TOP_SHIFT - cellSize));
+    /*
     myCircle->setRect(LEFT_SHIFT + clickedColumn*cellSize, TOP_SHIFT - cellSize, 95, 95);
     myCircle->setBrush(QBrush(QColor(255, 255, 0)));
+    */
     scene->addItem(myCircle);
 
     circlesList.push_back(myCircle);
@@ -67,9 +71,12 @@ void SinglePlayerField::AIMove()
     int toFall = (height - numberInColumn[column])*cellSize;
     addToColumn(column, 2);
 
-    AICircle* circle = new AICircle(toFall, timeToMove);
+    AICircle* circle = new AICircle(scene->world, timeToMove,
+                                    QPointF(LEFT_SHIFT + column*cellSize, TOP_SHIFT - cellSize));
+    /*
     circle->setRect(LEFT_SHIFT + column*cellSize, TOP_SHIFT - cellSize, 95, 95);
     circle->setBrush(QBrush(QColor(255, 0, 0)));
+    */
     scene->addItem(circle);
 
     circlesList.push_back(circle);
@@ -79,6 +86,7 @@ void SinglePlayerField::changePlayer(){
 
     if (*timeToMove == 0) {
         player = 1;
+        setCursor(Qt::PointingHandCursor);
         if (endOfGame()) AIWin();
     }
     if (*timeToMove == 2) AIMove();
