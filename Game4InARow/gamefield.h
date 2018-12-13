@@ -1,8 +1,7 @@
 #ifndef GAMEFIELD_H
 #define GAMEFIELD_H
 
-#include "singleplayerfield.h"
-#include "twoplayersfield.h"
+#include "field.h"
 #include "scene.h"
 
 #include <Box2D/Box2D.h>
@@ -28,6 +27,9 @@ public:
     const static int LEFT_SHIFT = 50;
     const static int TOP_SHIFT = 50;
 
+    void playerWin();
+    void playerWin(int player);
+    void AIWin();
 public slots: void checkForMove();
 
 public:
@@ -42,6 +44,7 @@ private:
     b2World* world;
 
     void createField(bool isSingleGame);
+    void resizeWinnerLabel();
 };
 
 #endif // GAMEFIELD_H

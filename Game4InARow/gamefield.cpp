@@ -1,16 +1,16 @@
 #include "gamefield.h"
 #include "ui_gamefield.h"
 
-#include "field.h"
+#include "singleplayerfield.h"
+#include "twoplayersfield.h"
+#include "circle.h"
 
 #include <vector>
 #include <QString>
 #include <QtGui>
 
-#include <QFileDialog>
 #include <QRectF>
 
-#include "circle.h"
 
 GameField::GameField(bool isSingleGame, QWidget *parent) :
     QWidget(parent),
@@ -29,7 +29,7 @@ GameField::GameField(bool isSingleGame, QWidget *parent) :
 
     moveTimeTimer = new QTimer();
     connect(moveTimeTimer, SIGNAL(timeout()), this, SLOT(checkForMove()));
-    moveTimeTimer->start(1000/4);
+    moveTimeTimer->start(1000/1);
 
 }
 
@@ -47,6 +47,8 @@ void GameField::createField(bool isSingleGame){
 
     if (isSingleGame) myField = new SinglePlayerField(scene, cellSize);
     else myField = new TwoPlayersField(scene, cellSize);
+
+    myField->setGameField(this);
 
     myField->setRect(QRectF(LEFT_SHIFT, TOP_SHIFT, 7*cellSize, 6*cellSize));
     myField->setBrush(QBrush(QColor(0,0,0,0)));
@@ -94,10 +96,35 @@ void GameField::createField(bool isSingleGame){
 
 }
 
+void GameField::resizeWinnerLabel()
+{
+    QFont font = ui->winnerLabel->font();
+    font.setPixelSize(50);
+    ui->winnerLabel->setFont(font);
+}
+
 
 GameField::~GameField()
 {
     delete ui;
+}
+
+void GameField::playerWin()
+{
+    resizeWinnerLabel();
+    ui->winnerLabel->setText("WIN!!!");
+}
+
+void GameField::playerWin(int player)
+{
+    resizeWinnerLabel();
+    ui->winnerLabel->setText("Player #" + QString::number(player) + " win!");
+}
+
+void GameField::AIWin()
+{
+    resizeWinnerLabel();
+    ui->winnerLabel->setText("LOSE!!!");
 }
 
 

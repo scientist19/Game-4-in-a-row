@@ -1,4 +1,5 @@
 #include "twoplayersfield.h"
+#include "gamefield.h"
 
 TwoPlayersField::TwoPlayersField(Scene* scene, int cellSize) : Field(scene, cellSize)
 {
@@ -45,11 +46,12 @@ void TwoPlayersField::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void TwoPlayersField::changePlayer(){
 
     if (*timeToMove == 2){
+
+        if (endOfGame()) playerWin();
+
         player = 3-player;
         *timeToMove = 0;
         setCursor(Qt::PointingHandCursor);
-
-        if (endOfGame()) playerWin();
     }
 }
 
@@ -62,4 +64,6 @@ void TwoPlayersField::playerWin()
 
     this->setAcceptHoverEvents(false);
     this->setCursor(Qt::ForbiddenCursor);
+
+    gameField->playerWin(player);
 }

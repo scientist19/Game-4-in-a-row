@@ -11,10 +11,13 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QTimer>
 
+class GameField;
+
 class Field : public QGraphicsRectItem
 {
 public:
     Field(Scene* scene, int cellSize);
+    void setGameField(GameField* gameField);
     void setItem(QGraphicsPixmapItem* item, int i, int j);
 
     bool canAddToColumn(int column);
@@ -56,6 +59,7 @@ protected:
     QGraphicsPixmapItem* itemsList[NMAX][NMAX];
     QVector <Circle*> circlesList;
     Scene* scene;
+    GameField* gameField;
 
 
     int findClickedColumn(int x);

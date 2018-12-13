@@ -12,6 +12,11 @@ Field::Field(Scene* scene, int cellSize) :
 
 }
 
+void Field::setGameField(GameField *gameField)
+{
+    this->gameField = gameField;
+}
+
 void Field::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     int selectedColumn = findClickedColumn(event->pos().x());
@@ -26,9 +31,11 @@ void Field::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     this->selectedColumn = selectedColumn;
 //    setCursor(Qt::PointingHandCursor);
 
-    if (canAddToColumn(selectedColumn))
-    for (int i = 0; i < height; i++)
-        itemsList[i][selectedColumn]->setPixmap(selectedCellImage);
+    if (canAddToColumn(selectedColumn)){
+        for (int i = 0; i < height; i++)
+            itemsList[i][selectedColumn]->setPixmap(selectedCellImage);
+        setCursor(Qt::PointingHandCursor);
+    }
     else setCursor(Qt::ForbiddenCursor);
 
 }
@@ -58,9 +65,11 @@ void Field::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
     this->selectedColumn = selectedColumn;
 //    setCursor(Qt::PointingHandCursor);
 
-    if (canAddToColumn(selectedColumn))
-    for (int i = 0; i < height; i++)
-        itemsList[i][selectedColumn]->setPixmap(selectedCellImage);
+    if (canAddToColumn(selectedColumn)){
+        for (int i = 0; i < height; i++)
+            itemsList[i][selectedColumn]->setPixmap(selectedCellImage);
+        setCursor(Qt::PointingHandCursor);
+    }
     else setCursor(Qt::ForbiddenCursor);
 }
 

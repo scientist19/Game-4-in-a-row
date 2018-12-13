@@ -1,4 +1,5 @@
 #include "singleplayerfield.h"
+#include "gamefield.h"
 
 SinglePlayerField::SinglePlayerField(Scene* scene, int cellSize) : Field(scene, cellSize)
 {
@@ -45,6 +46,8 @@ void SinglePlayerField::playerWin()
 
     this->setAcceptHoverEvents(false);
     this->setCursor(Qt::ForbiddenCursor);
+
+    gameField->playerWin();
 }
 
 void SinglePlayerField::AIWin()
@@ -56,6 +59,8 @@ void SinglePlayerField::AIWin()
 
     this->setAcceptHoverEvents(false);
     this->setCursor(Qt::ForbiddenCursor);
+
+    gameField->AIWin();
 }
 
 void SinglePlayerField::AIMove()
@@ -84,7 +89,7 @@ void SinglePlayerField::AIMove()
 
 void SinglePlayerField::changePlayer(){
 
-    if (*timeToMove == 0) {
+    if (*timeToMove == 0 && player != 1) {
         player = 1;
         setCursor(Qt::PointingHandCursor);
         if (endOfGame()) AIWin();
